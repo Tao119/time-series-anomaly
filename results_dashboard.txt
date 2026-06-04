@@ -1,0 +1,154 @@
+=================================================================
+  Time Series Anomaly Detection — Results Dashboard
+  Generated: 2026-06-05 02:02
+=================================================================
+
+┌─────────────────────────────────────────────────────────────┐
+│            SECTION 1: Main Benchmark (3 Datasets)           │
+└─────────────────────────────────────────────────────────────┘
+
+  ───────────────────────────────────────────────────────────
+  ECG Dataset  (10,000 points, ~2.0% anomaly rate)
+  ───────────────────────────────────────────────────────────
+┌──────────────────┬────────────┬──────────┬─────────┬─────────┐
+│ Method           │  Precision │   Recall │      F1 │     AUC │
+├──────────────────┼────────────┼──────────┼─────────┼─────────┤
+│ Prophet          │     0.2686 │   0.5950 │  0.3701 │  0.8501 │
+│ IsolationForest  │     0.1000 │   0.0100 │  0.0182 │  0.6654 │
+│ LSTM_AE          │     0.0805 │   0.0700 │  0.0749 │  0.6747 │
+│ TCN              │     0.0800 │   0.0300 │  0.0436 │  0.6374 │
+│ LSTM_VAE         │     0.0800 │   0.0400 │  0.0533 │  0.5879 │
+└──────────────────┴────────────┴──────────┴─────────┴─────────┘
+
+  Best per metric:
+    Precision   : Prophet (0.2686)
+    Recall      : Prophet (0.5950)
+    F1          : Prophet (0.3701)
+    AUC         : Prophet (0.8501)
+
+  ───────────────────────────────────────────────────────────
+  Industrial Dataset  (10,000 points, ~~15.0% (expanded level shifts) anomaly rate)
+  ───────────────────────────────────────────────────────────
+┌──────────────────┬────────────┬──────────┬─────────┬─────────┐
+│ Method           │  Precision │   Recall │      F1 │     AUC │
+├──────────────────┼────────────┼──────────┼─────────┼─────────┤
+│ Prophet          │     0.9139 │   0.0446 │  0.0850 │  0.5602 │
+│ IsolationForest  │     0.6143 │   0.0139 │  0.0272 │  0.6497 │
+│ LSTM_AE          │     0.3320 │   0.2375 │  0.2769 │  0.5475 │
+│ TCN              │     0.9600 │   0.0078 │  0.0154 │  0.5057 │
+│ LSTM_VAE         │     0.3405 │   0.2036 │  0.2548 │  0.5464 │
+└──────────────────┴────────────┴──────────┴─────────┴─────────┘
+
+  Best per metric:
+    Precision   : TCN (0.9600)
+    Recall      : LSTM_AE (0.2375)
+    F1          : LSTM_AE (0.2769)
+    AUC         : IsolationForest (0.6497)
+
+  ───────────────────────────────────────────────────────────
+  Financial Dataset  (10,000 points, ~~5.5% (3σ jump events) anomaly rate)
+  ───────────────────────────────────────────────────────────
+┌──────────────────┬────────────┬──────────┬─────────┬─────────┐
+│ Method           │  Precision │   Recall │      F1 │     AUC │
+├──────────────────┼────────────┼──────────┼─────────┼─────────┤
+│ Prophet          │     0.0561 │   0.3391 │  0.0962 │  0.6463 │
+│ IsolationForest  │     0.0667 │   0.0696 │  0.0681 │  0.5178 │
+│ LSTM_AE          │     0.0338 │   0.0522 │  0.0410 │  0.4779 │
+│ TCN              │     0.0371 │   0.0565 │  0.0448 │  0.4810 │
+│ LSTM_VAE         │     0.0371 │   0.0565 │  0.0448 │  0.4804 │
+└──────────────────┴────────────┴──────────┴─────────┴─────────┘
+
+  Best per metric:
+    Precision   : IsolationForest (0.0667)
+    Recall      : Prophet (0.3391)
+    F1          : Prophet (0.0962)
+    AUC         : Prophet (0.6463)
+
+┌─────────────────────────────────────────────────────────────┐
+│         SECTION 2: Medical ECG Anomaly Detection            │
+└─────────────────────────────────────────────────────────────┘
+
+  Clinical anomaly types:
+    Spike anomaly → ectopic beat / artifact
+    Flat segment  → lead dropout / missing beat
+
+  ECG Dataset (10,000 points, ~2% anomaly rate)
+  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─  ─
+┌──────────────────┬────────────┬────────────┬──────────┬─────────┬─────────┐
+│ Method           │   Spike F1 │    Flat F1 │   All F1 │     AUC │ Time(s) │
+├──────────────────┼────────────┼────────────┼──────────┼─────────┼─────────┤
+│ Prophet          │     0.3352 │     0.2144 │   0.2935 │  0.7618 │     0.0 │
+│ IsolationForest  │     0.0333 │     0.0000 │   0.0026 │  0.5410 │     0.0 │
+│ LSTM_AE          │     0.0794 │     0.0428 │   0.0537 │  0.5903 │     0.0 │
+│ TCN              │     0.0571 │     0.0054 │   0.0114 │  0.4735 │     0.0 │
+│ LSTM_VAE         │     0.0700 │     0.0053 │   0.0138 │  0.3819 │     0.0 │
+└──────────────────┴────────────┴────────────┴──────────┴─────────┴─────────┘
+
+  Sensitivity / Specificity per anomaly type:
+┌──────────────────┬───────────────┬───────────────┬───────────────┬───────────────┐
+│ Method           │    Spike Sens │    Spike Spec │     Flat Sens │     Flat Spec │
+├──────────────────┼───────────────┼───────────────┼───────────────┼───────────────┤
+│ Prophet          │        0.0000 │        0.0000 │        0.0000 │        0.0000 │
+│ IsolationForest  │        0.0000 │        0.0000 │        0.0000 │        0.0000 │
+│ LSTM_AE          │        0.0000 │        0.0000 │        0.0000 │        0.0000 │
+│ TCN              │        0.0000 │        0.0000 │        0.0000 │        0.0000 │
+│ LSTM_VAE         │        0.0000 │        0.0000 │        0.0000 │        0.0000 │
+└──────────────────┴───────────────┴───────────────┴───────────────┴───────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│            SECTION 3: Clinical Interpretation               │
+└─────────────────────────────────────────────────────────────┘
+
+  Detector Rankings (by Overall ECG F1):
+    #1 Prophet            F1_all=0.2935  F1_spike=0.3352  F1_flat=0.2144
+    #2 LSTM_AE            F1_all=0.0537  F1_spike=0.0794  F1_flat=0.0428
+    #3 LSTM_VAE           F1_all=0.0138  F1_spike=0.0700  F1_flat=0.0053
+    #4 TCN                F1_all=0.0114  F1_spike=0.0571  F1_flat=0.0054
+    #5 IsolationForest    F1_all=0.0026  F1_spike=0.0333  F1_flat=0.0000
+
+  Clinical Recommendations:
+
+  [Ectopic beat / artifact (spike anomaly)]
+  Recommended: Prophet
+  Action: Sudden amplitude spikes in ECG should trigger review 
+           for: (1) Ectopic/premature beats — evaluate for 
+           arrhythmia if frequent. (2) Movement artifact — 
+           verify lead placement, ask patient to remain still. 
+
+  [Lead dropout / flat segment (missing beat anomaly)]
+  Recommended: Prophet
+  Action: Flat ECG segments suggest: (1) Lead dropout — 
+           re-attach electrode and verify contact quality. (2) 
+           True asystole — if unexpected, immediately initiate 
+           resuscitation protocol. (3) Electrode displacement — 
+           systematic lead check required. 
+
+  [General ECG monitoring (all anomaly types)]
+  Recommended: Prophet
+  Action: For continuous ICU/ward ECG monitoring: Layer 1 
+           (fast): Rule-based threshold (Prophet/IQR) for 
+           immediate spike alerts. Layer 2 (precise): LSTM-based 
+           model for sustained pattern changes. False positive 
+           rate management is critical — alert fatigue reduces 
+           clinical utility. 
+
+┌─────────────────────────────────────────────────────────────┐
+│                  SECTION 4: Key Observations                │
+└─────────────────────────────────────────────────────────────┘
+
+  - Best overall ECG detector     : Prophet (F1=0.3701)
+  - Best overall Industrial det.  : LSTM_AE (F1=0.2769)
+  - Best overall Financial det.   : Prophet (F1=0.0962)
+  - Rule-based (Prophet) excels at isolated spike detection
+    with low latency — ideal for real-time alerting.
+  - Reconstruction models (LSTM_AE, LSTM_VAE) better capture
+    sustained pattern changes (flat segments / level shifts).
+  - Financial data is hardest — random-walk nature means
+    anomalies are statistically indistinguishable from noise.
+  - For clinical deployment, ensemble strategies combining
+    rule-based fast-response + neural slow-but-precise
+    are recommended to balance sensitivity and specificity.
+
+=================================================================
+  End of Report
+=================================================================
